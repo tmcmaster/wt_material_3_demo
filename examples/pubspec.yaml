@@ -1,0 +1,48 @@
+name: wt_material_3_demo_examples
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.4.0
+  flutter: ^3.19.0
+
+flutter:
+  uses-material-design: true
+
+scripts:
+  project:
+    clean: flutter clean
+    get: flutter clean
+    refresh: flutter clean; flutter pub get
+    test: flutter test
+    analyse: flutter analyze
+  lint:
+    check: dart fix --dry-run
+  pub:
+    upgrade: flutter pub upgrade --major-versions
+  macos:
+    init: flutter create --platforms=macos .
+    build: flutter build macos --release
+    run: flutter run -t lib/main_widgetbook.dart -d MacOS
+    configure: open macos/Runner.xcworkspace
+    fix: (cd macos; rm Podfile.lock; gem pristine ffi --version 1.15.5; pod install --repo-update)
+  web:
+    init: flutter create --platforms=web .
+    build: flutter build web -t lib/main_demo_site.dart --release --source-maps --no-tree-shake-icons
+    run: flutter run -t lib/main_demo_site.dart -d Chrome
+    deploy:  flutter build web -t lib/main_demo_site.dart --release --output ../docs --source-maps --no-tree-shake-icons --base-href "/wt_responsive_layout/"
+    serve: (cd ../docs; python3 -m http.server)
+    view: open https://tmcmaster.github.io/wt_responsive_layout
+
+dependencies:
+  cupertino_icons: ^1.0.6
+  flutter:
+    sdk: flutter
+  wt_material_3_demo:
+    path: ..
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0

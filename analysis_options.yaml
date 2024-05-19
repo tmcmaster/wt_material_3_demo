@@ -1,0 +1,7 @@
+include: package:wt_logging/lint.yaml
+
+linter:
+  rules:
+
+analyzer:
+  exclude: [macos/**]

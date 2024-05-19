@@ -1,0 +1,46 @@
+name: wt_material_3_demo
+description: "A new Flutter package project."
+homepage: https://github.com/tmcmaster/wt_material_3_demo
+version: 0.1.1+1
+publish_to: "none"
+
+environment:
+  sdk: ^3.4.0
+  flutter: ^3.19.0
+
+flutter:
+  uses-material-design: true
+
+scripts:
+  project:
+    get:
+      $script: flutter pub get
+      $after: (cd examples && rps project get)
+    clean:
+      $script: flutter clean
+      $after: (cd examples && rps project clean)
+    refresh:
+      $script: flutter clean; flutter pub get
+      $after: (cd examples && rps project refresh)
+    test:
+      $script: flutter test
+      $after: (cd examples && rps project test)
+    analyse:
+      $script: flutter analyze
+      $after: (cd examples; rps project analyse)
+    status: git status
+    size: du -sh *
+
+dependencies:
+  cupertino_icons: ^1.0.2
+  flutter:
+    sdk: flutter
+  url_launcher: ^6.1.8
+  wt_logging:
+    git:
+      url: https://github.com/tmcmaster/wt_logging.git
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0

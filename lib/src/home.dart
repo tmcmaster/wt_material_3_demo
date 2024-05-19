@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-
 import 'package:wt_material_3_demo/src/color_palettes_screen.dart';
 import 'package:wt_material_3_demo/src/component_screen.dart';
 import 'package:wt_material_3_demo/src/constants.dart';
@@ -50,7 +49,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   int screenIndex = ScreenSelected.component.value;
 
   @override
-  initState() {
+  void initState() {
     super.initState();
     controller = AnimationController(
       duration: Duration(milliseconds: transitionLength.toInt() * 2),
@@ -83,15 +82,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         showMediumSizeLayout = true;
         showLargeSizeLayout = false;
       }
-      if (status != AnimationStatus.forward &&
-          status != AnimationStatus.completed) {
+      if (status != AnimationStatus.forward && status != AnimationStatus.completed) {
         controller.forward();
       }
     } else {
       showMediumSizeLayout = false;
       showLargeSizeLayout = false;
-      if (status != AnimationStatus.reverse &&
-          status != AnimationStatus.dismissed) {
+      if (status != AnimationStatus.reverse && status != AnimationStatus.dismissed) {
         controller.reverse();
       }
     }
@@ -116,9 +113,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             child: OneTwoTransition(
               animation: railAnimation,
               one: FirstComponentList(
-                  showNavBottomBar: showNavBarExample,
-                  scaffoldKey: scaffoldKey,
-                  showSecondList: showMediumSizeLayout || showLargeSizeLayout,),
+                showNavBottomBar: showNavBarExample,
+                scaffoldKey: scaffoldKey,
+                showSecondList: showMediumSizeLayout || showLargeSizeLayout,
+              ),
               two: SecondComponentList(
                 scaffoldKey: scaffoldKey,
               ),
@@ -131,9 +129,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   PreferredSizeWidget createAppBar() {
     return AppBar(
-      title: widget.useMaterial3
-          ? const Text('Material 3')
-          : const Text('Material 2'),
+      title: widget.useMaterial3 ? const Text('Material 3') : const Text('Material 2'),
       actions: !showMediumSizeLayout && !showLargeSizeLayout
           ? [
               _BrightnessButton(
@@ -199,8 +195,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           animationController: controller,
           railAnimation: railAnimation,
           appBar: createAppBar(),
-          body: createScreenFor(
-              ScreenSelected.values[screenIndex], controller.value == 1,),
+          body: createScreenFor(ScreenSelected.values[screenIndex], controller.value == 1),
           navigationRail: NavigationRail(
             extended: showLargeSizeLayout,
             destinations: navRailDestinations,
@@ -219,8 +214,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         useLightMode: widget.useLightMode,
                         handleBrightnessChange: widget.handleBrightnessChange,
                         useMaterial3: widget.useMaterial3,
-                        handleMaterialVersionChange:
-                            widget.handleMaterialVersionChange,
+                        handleMaterialVersionChange: widget.handleMaterialVersionChange,
                         handleImageSelect: widget.handleImageSelect,
                         handleColorSelect: widget.handleColorSelect,
                         colorSelectionMethod: widget.colorSelectionMethod,
@@ -253,7 +247,7 @@ class _BrightnessButton extends StatelessWidget {
     this.showTooltipBelow = true,
   });
 
-  final Function handleBrightnessChange;
+  final Function(bool) handleBrightnessChange;
   final bool showTooltipBelow;
 
   @override
@@ -263,9 +257,8 @@ class _BrightnessButton extends StatelessWidget {
       preferBelow: showTooltipBelow,
       message: 'Toggle brightness',
       child: IconButton(
-        icon: isBright
-            ? const Icon(Icons.dark_mode_outlined)
-            : const Icon(Icons.light_mode_outlined),
+        icon:
+            isBright ? const Icon(Icons.dark_mode_outlined) : const Icon(Icons.light_mode_outlined),
         onPressed: () => handleBrightnessChange(!isBright),
       ),
     );
@@ -288,9 +281,7 @@ class _Material3Button extends StatelessWidget {
       preferBelow: showTooltipBelow,
       message: 'Switch to Material ${useMaterial3 ? 2 : 3}',
       child: IconButton(
-        icon: useMaterial3
-            ? const Icon(Icons.filter_2)
-            : const Icon(Icons.filter_3),
+        icon: useMaterial3 ? const Icon(Icons.filter_2) : const Icon(Icons.filter_3),
         onPressed: handleMaterialVersionChange,
       ),
     );
@@ -313,7 +304,7 @@ class _ColorSeedButton extends StatelessWidget {
     return PopupMenuButton(
       icon: Icon(
         Icons.palette_outlined,
-        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+        color: Theme.of(context).colorScheme.surface,
       ),
       tooltip: 'Select a seed color',
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -367,14 +358,13 @@ class _ColorImageButton extends StatelessWidget {
     return PopupMenuButton(
       icon: Icon(
         Icons.image_outlined,
-        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+        color: Theme.of(context).colorScheme.surface,
       ),
       tooltip: 'Select a color extraction image',
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       itemBuilder: (context) {
         return List.generate(ColorImageProvider.values.length, (index) {
-          final ColorImageProvider currentImageProvider =
-              ColorImageProvider.values[index];
+          final ColorImageProvider currentImageProvider = ColorImageProvider.values[index];
 
           return PopupMenuItem(
             value: index,
@@ -392,8 +382,7 @@ class _ColorImageButton extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image(
-                          image: NetworkImage(
-                              ColorImageProvider.values[index].url,),
+                          image: NetworkImage(ColorImageProvider.values[index].url),
                         ),
                       ),
                     ),
@@ -453,23 +442,23 @@ class _ExpandedTrailingActions extends StatelessWidget {
               const Text('Brightness'),
               Expanded(child: Container()),
               Switch(
-                  value: useLightMode,
-                  onChanged: (value) {
-                    handleBrightnessChange(value);
-                  },),
+                value: useLightMode,
+                onChanged: (value) {
+                  handleBrightnessChange(value);
+                },
+              ),
             ],
           ),
           Row(
             children: [
-              useMaterial3
-                  ? const Text('Material 3')
-                  : const Text('Material 2'),
+              if (useMaterial3) const Text('Material 3') else const Text('Material 2'),
               Expanded(child: Container()),
               Switch(
-                  value: useMaterial3,
-                  onChanged: (_) {
-                    handleMaterialVersionChange();
-                  },),
+                value: useMaterial3,
+                onChanged: (_) {
+                  handleMaterialVersionChange();
+                },
+              ),
             ],
           ),
           const Divider(),
@@ -584,15 +573,16 @@ class _ExpandedImageColorAction extends StatelessWidget {
 }
 
 class NavigationTransition extends StatefulWidget {
-  const NavigationTransition(
-      {super.key,
-      required this.scaffoldKey,
-      required this.animationController,
-      required this.railAnimation,
-      required this.navigationRail,
-      required this.navigationBar,
-      required this.appBar,
-      required this.body,});
+  const NavigationTransition({
+    super.key,
+    required this.scaffoldKey,
+    required this.animationController,
+    required this.railAnimation,
+    required this.navigationRail,
+    required this.navigationBar,
+    required this.appBar,
+    required this.body,
+  });
 
   final GlobalKey<ScaffoldState> scaffoldKey;
   final AnimationController animationController;
@@ -706,11 +696,12 @@ class OffsetAnimation extends CurvedAnimation {
 }
 
 class RailTransition extends StatefulWidget {
-  const RailTransition(
-      {super.key,
-      required this.animation,
-      required this.backgroundColor,
-      required this.child,});
+  const RailTransition({
+    super.key,
+    required this.animation,
+    required this.backgroundColor,
+    required this.child,
+  });
 
   final Animation<double> animation;
   final Widget child;
@@ -762,11 +753,12 @@ class _RailTransition extends State<RailTransition> {
 }
 
 class BarTransition extends StatefulWidget {
-  const BarTransition(
-      {super.key,
-      required this.animation,
-      required this.backgroundColor,
-      required this.child,});
+  const BarTransition({
+    super.key,
+    required this.animation,
+    required this.backgroundColor,
+    required this.child,
+  });
 
   final Animation<double> animation;
   final Color backgroundColor;

@@ -5,7 +5,7 @@ version: 1.0.0+1
 homepage: https://github.com/tmcmaster/wt_material_3_demo/tree/main/examples
 
 environment:
-  sdk: ^3.4.0
+  sdk: ^3.3.4
   flutter: ^3.19.0
 
 flutter:

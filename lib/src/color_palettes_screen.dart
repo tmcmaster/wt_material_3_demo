@@ -5,7 +5,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:wt_logging/wt_logging.dart';
 
 const Widget divider = SizedBox(height: 10);
 
@@ -15,7 +14,6 @@ const Widget divider = SizedBox(height: 10);
 const double narrowScreenWidthThreshold = 400;
 
 class ColorPalettesScreen extends StatelessWidget {
-  static final log = logger(ColorPalettesScreen, level: Level.debug);
   const ColorPalettesScreen({super.key});
 
   @override
@@ -55,9 +53,10 @@ class ColorPalettesScreen extends StatelessWidget {
             style: Theme.of(context).textTheme.bodySmall,
             children: [
               const TextSpan(
-                  text: 'To create color schemes based on a '
-                      'platform\'s implementation of dynamic color, '
-                      'use the ',),
+                text: 'To create color schemes based on a '
+                    "platform's implementation of dynamic color, "
+                    'use the ',
+              ),
               TextSpan(
                 text: 'dynamic_color',
                 style: const TextStyle(decoration: TextDecoration.underline),
@@ -77,55 +76,57 @@ class ColorPalettesScreen extends StatelessWidget {
         );
 
     return Expanded(
-      child: LayoutBuilder(builder: (context, constraints) {
-        if (constraints.maxWidth < narrowScreenWidthThreshold) {
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                dynamicColorNotice(),
-                divider,
-                schemeLabel('Light ColorScheme'),
-                schemeView(lightTheme),
-                divider,
-                divider,
-                schemeLabel('Dark ColorScheme'),
-                schemeView(darkTheme),
-              ],
-            ),
-          );
-        } else {
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 5),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth < narrowScreenWidthThreshold) {
+            return SingleChildScrollView(
               child: Column(
                 children: [
                   dynamicColorNotice(),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            schemeLabel('Light ColorScheme'),
-                            schemeView(lightTheme),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            schemeLabel('Dark ColorScheme'),
-                            schemeView(darkTheme),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                  divider,
+                  schemeLabel('Light ColorScheme'),
+                  schemeView(lightTheme),
+                  divider,
+                  divider,
+                  schemeLabel('Dark ColorScheme'),
+                  schemeView(darkTheme),
                 ],
               ),
-            ),
-          );
-        }
-      },),
+            );
+          } else {
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: Column(
+                  children: [
+                    dynamicColorNotice(),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              schemeLabel('Light ColorScheme'),
+                              schemeView(lightTheme),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              schemeLabel('Dark ColorScheme'),
+                              schemeView(darkTheme),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }
@@ -253,13 +254,13 @@ class ColorSchemeView extends StatelessWidget {
             ),
             ColorChip(
               label: 'surfaceContainerHighest',
-              color: colorScheme.surfaceContainerHighest,
-              onColor: colorScheme.surfaceContainerHighest,
+              color: colorScheme.surface,
+              onColor: colorScheme.surface,
             ),
             ColorChip(
               label: 'surfaceContainerHighest',
-              color: colorScheme.surfaceContainerHighest,
-              onColor: colorScheme.surfaceContainerHighest,
+              color: colorScheme.surface,
+              onColor: colorScheme.surface,
             ),
             ColorChip(
               label: 'surfaceTint',
@@ -368,7 +369,7 @@ class ColorChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final Color labelColor = onColor ?? contrastColor(color);
 
-    return Container(
+    return ColoredBox(
       color: color,
       child: Padding(
         padding: const EdgeInsets.all(16),

@@ -17,17 +17,17 @@ class TypographyScreen extends StatelessWidget {
         children: <Widget>[
           const SizedBox(height: 7),
           TextStyleExample(
-              name: 'Display Large', style: textTheme.displayLarge!),
+              name: 'Display Large', style: textTheme.displayLarge!,),
           TextStyleExample(
-              name: 'Display Medium', style: textTheme.displayMedium!),
+              name: 'Display Medium', style: textTheme.displayMedium!,),
           TextStyleExample(
-              name: 'Display Small', style: textTheme.displaySmall!),
+              name: 'Display Small', style: textTheme.displaySmall!,),
           TextStyleExample(
-              name: 'Headline Large', style: textTheme.headlineLarge!),
+              name: 'Headline Large', style: textTheme.headlineLarge!,),
           TextStyleExample(
-              name: 'Headline Medium', style: textTheme.headlineMedium!),
+              name: 'Headline Medium', style: textTheme.headlineMedium!,),
           TextStyleExample(
-              name: 'Headline Small', style: textTheme.headlineSmall!),
+              name: 'Headline Small', style: textTheme.headlineSmall!,),
           TextStyleExample(name: 'Title Large', style: textTheme.titleLarge!),
           TextStyleExample(name: 'Title Medium', style: textTheme.titleMedium!),
           TextStyleExample(name: 'Title Small', style: textTheme.titleSmall!),

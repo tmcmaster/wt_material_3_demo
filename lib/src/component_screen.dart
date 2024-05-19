@@ -27,7 +27,7 @@ class FirstComponentList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> children = [
+    final List<Widget> children = [
       const Actions(),
       colDivider,
       const Communication(),
@@ -39,10 +39,10 @@ class FirstComponentList extends StatelessWidget {
         colDivider,
         const Selection(),
         colDivider,
-        const TextInputs()
+        const TextInputs(),
       ],
     ];
-    List<double?> heights = List.filled(children.length, null);
+    final List<double?> heights = List.filled(children.length, null);
 
     // Fully traverse this list before moving on.
     return FocusTraversalGroup(
@@ -81,14 +81,14 @@ class SecondComponentList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> children = [
+    final List<Widget> children = [
       Navigation(scaffoldKey: scaffoldKey),
       colDivider,
       const Selection(),
       colDivider,
       const TextInputs(),
     ];
-    List<double?> heights = List.filled(children.length, null);
+    final List<double?> heights = List.filled(children.length, null);
 
     // Fully traverse this list before moving on.
     return FocusTraversalGroup(
@@ -144,7 +144,7 @@ class _CacheHeight extends SingleChildRenderObjectWidget {
 
   @override
   void updateRenderObject(
-      BuildContext context, _RenderCacheHeight renderObject) {
+      BuildContext context, _RenderCacheHeight renderObject,) {
     renderObject
       ..heights = heights
       ..index = index;
@@ -198,7 +198,7 @@ class BuildSlivers extends SliverChildBuilderDelegate {
 
   @override
   double? estimateMaxScrollOffset(int firstIndex, int lastIndex,
-      double leadingScrollOffset, double trailingScrollOffset) {
+      double leadingScrollOffset, double trailingScrollOffset,) {
     return heights.reduce((sum, height) => (sum ?? 0) + (height ?? 0))!;
   }
 }
@@ -213,7 +213,7 @@ class Actions extends StatelessWidget {
       FloatingActionButtons(),
       IconToggleButtons(),
       SegmentedButtons(),
-    ]);
+    ],);
   }
 }
 
@@ -230,7 +230,7 @@ class Communication extends StatelessWidget {
       ),
       ProgressIndicators(),
       SnackBarSection(),
-    ]);
+    ],);
   }
 }
 
@@ -246,7 +246,7 @@ class Containment extends StatelessWidget {
       Dividers(),
       // TODO: Add Lists, https://github.com/flutter/flutter/issues/114006
       // TODO: Add Side sheets, https://github.com/flutter/flutter/issues/119328
-    ]);
+    ],);
   }
 }
 
@@ -268,7 +268,7 @@ class Navigation extends StatelessWidget {
       const Tabs(),
       const SearchAnchors(),
       const TopAppBars(),
-    ]);
+    ],);
   }
 }
 
@@ -286,7 +286,7 @@ class Selection extends StatelessWidget {
       Radios(),
       Sliders(),
       Switches(),
-    ]);
+    ],);
   }
 }
 
@@ -414,7 +414,7 @@ class ButtonsWithIcon extends StatelessWidget {
               onPressed: () {},
               icon: const Icon(Icons.add),
               label: const Text('Icon'),
-            )
+            ),
           ],
         ),
       ),
@@ -492,7 +492,7 @@ class Cards extends StatelessWidget {
                     const Align(
                       alignment: Alignment.bottomLeft,
                       child: Text('Elevated'),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -518,7 +518,7 @@ class Cards extends StatelessWidget {
                     const Align(
                       alignment: Alignment.bottomLeft,
                       child: Text('Filled'),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -549,7 +549,7 @@ class Cards extends StatelessWidget {
                     const Align(
                       alignment: Alignment.bottomLeft,
                       child: Text('Outlined'),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -709,7 +709,7 @@ class _TextFieldsState extends State<TextFields> {
                         ),
                       ),
                     ),
-                  ])),
+                  ],),),
         ],
       ),
     );
@@ -730,7 +730,7 @@ class _DialogsState extends State<Dialogs> {
       builder: (context) => AlertDialog(
         title: const Text('What is a dialog?'),
         content: const Text(
-            'A dialog is a type of modal window that appears in front of app content to provide critical information, or prompt for a decision to be made.'),
+            'A dialog is a type of modal window that appears in front of app content to provide critical information, or prompt for a decision to be made.',),
         actions: <Widget>[
           TextButton(
             child: const Text('Dismiss'),
@@ -1085,7 +1085,7 @@ const List<NavigationDestination> appBarDestinations = [
     icon: Icon(Icons.invert_colors_on_outlined),
     label: 'Elevation',
     selectedIcon: Icon(Icons.opacity),
-  )
+  ),
 ];
 
 const List<Widget> exampleBarDestinations = [
@@ -1106,7 +1106,7 @@ const List<Widget> exampleBarDestinations = [
     icon: Icon(Icons.account_box_outlined),
     label: 'Account',
     selectedIcon: Icon(Icons.account_box),
-  )
+  ),
 ];
 
 List<Widget> barWithBadgeDestinations = [
@@ -1133,7 +1133,7 @@ List<Widget> barWithBadgeDestinations = [
     icon: Badge.count(count: 3, child: const Icon(Icons.videocam_outlined)),
     label: 'Meet',
     selectedIcon: Badge.count(count: 3, child: const Icon(Icons.videocam)),
-  )
+  ),
 ];
 
 class NavigationBars extends StatefulWidget {
@@ -1196,12 +1196,12 @@ class _NavigationBarsState extends State<NavigationBars> {
       navigationBar = ComponentDecoration(
           label: 'Badges',
           tooltipMessage: 'Use Badge or Badge.count',
-          child: navigationBar);
+          child: navigationBar,);
     } else if (widget.isExampleBar) {
       navigationBar = ComponentDecoration(
           label: 'Navigation bar',
           tooltipMessage: 'Use NavigationBar',
-          child: navigationBar);
+          child: navigationBar,);
     }
 
     return navigationBar;
@@ -1419,7 +1419,7 @@ class _DatePickerState extends State<DatePicker> {
       tooltipMessage: 'Use showDatePicker',
       child: TextButton.icon(
         onPressed: () async {
-          DateTime? date = await showDatePicker(
+          final DateTime? date = await showDatePicker(
             context: context,
             initialDate: selectedDate ?? DateTime.now(),
             firstDate: _firstDate,
@@ -1430,8 +1430,8 @@ class _DatePickerState extends State<DatePicker> {
             if (selectedDate != null) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Text(
-                    'Selected Date: ${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'),
-              ));
+                    'Selected Date: ${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}',),
+              ),);
             }
           });
         },
@@ -1480,7 +1480,7 @@ class _TimePickerState extends State<TimePicker> {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content:
                     Text('Selected time: ${selectedTime!.format(context)}'),
-              ));
+              ),);
             }
           });
         },
@@ -1532,19 +1532,19 @@ class _SingleChoiceState extends State<SingleChoice> {
         ButtonSegment<Calendar>(
             value: Calendar.day,
             label: Text('Day'),
-            icon: Icon(Icons.calendar_view_day)),
+            icon: Icon(Icons.calendar_view_day),),
         ButtonSegment<Calendar>(
             value: Calendar.week,
             label: Text('Week'),
-            icon: Icon(Icons.calendar_view_week)),
+            icon: Icon(Icons.calendar_view_week),),
         ButtonSegment<Calendar>(
             value: Calendar.month,
             label: Text('Month'),
-            icon: Icon(Icons.calendar_view_month)),
+            icon: Icon(Icons.calendar_view_month),),
         ButtonSegment<Calendar>(
             value: Calendar.year,
             label: Text('Year'),
-            icon: Icon(Icons.calendar_today)),
+            icon: Icon(Icons.calendar_today),),
       ],
       selected: <Calendar>{calendarView},
       onSelectionChanged: (newSelection) {
@@ -1649,13 +1649,13 @@ class _BottomSheetSectionState extends State<BottomSheetSection> {
       IconButton(onPressed: () {}, icon: const Icon(Icons.settings_outlined)),
       IconButton(onPressed: () {}, icon: const Icon(Icons.favorite_border)),
     ];
-    List<Text> labelList = const <Text>[
+    final List<Text> labelList = const <Text>[
       Text('Share'),
       Text('Add to'),
       Text('Trash'),
       Text('Archive'),
       Text('Settings'),
-      Text('Favorite')
+      Text('Favorite'),
     ];
 
     buttonList = List.generate(
@@ -1669,7 +1669,7 @@ class _BottomSheetSectionState extends State<BottomSheetSection> {
                   labelList[index],
                 ],
               ),
-            ));
+            ),);
 
     return ComponentDecoration(
       label: 'Bottom sheet',
@@ -1901,7 +1901,7 @@ class NavigationDrawers extends StatelessWidget {
           colDivider,
           TextButton(
             child: const Text('Show modal navigation drawer',
-                style: TextStyle(fontWeight: FontWeight.bold)),
+                style: TextStyle(fontWeight: FontWeight.bold),),
             onPressed: () {
               scaffoldKey.currentState!.openEndDrawer();
             },
@@ -1979,15 +1979,15 @@ const List<ExampleDestination> destinations = <ExampleDestination>[
   ExampleDestination('Inbox', Icon(Icons.inbox_outlined), Icon(Icons.inbox)),
   ExampleDestination('Outbox', Icon(Icons.send_outlined), Icon(Icons.send)),
   ExampleDestination(
-      'Favorites', Icon(Icons.favorite_outline), Icon(Icons.favorite)),
+      'Favorites', Icon(Icons.favorite_outline), Icon(Icons.favorite),),
   ExampleDestination('Trash', Icon(Icons.delete_outline), Icon(Icons.delete)),
 ];
 
 const List<ExampleDestination> labelDestinations = <ExampleDestination>[
   ExampleDestination(
-      'Family', Icon(Icons.bookmark_border), Icon(Icons.bookmark)),
+      'Family', Icon(Icons.bookmark_border), Icon(Icons.bookmark),),
   ExampleDestination(
-      'School', Icon(Icons.bookmark_border), Icon(Icons.bookmark)),
+      'School', Icon(Icons.bookmark_border), Icon(Icons.bookmark),),
   ExampleDestination('Work', Icon(Icons.bookmark_border), Icon(Icons.bookmark)),
 ];
 
@@ -2000,7 +2000,7 @@ class NavigationRails extends StatelessWidget {
       label: 'Navigation rail',
       tooltipMessage: 'Use NavigationRail',
       child: IntrinsicWidth(
-          child: SizedBox(height: 420, child: NavigationRailSection())),
+          child: SizedBox(height: 420, child: NavigationRailSection()),),
     );
   }
 }
@@ -2025,7 +2025,7 @@ class _NavigationRailSectionState extends State<NavigationRailSection> {
       },
       elevation: 4,
       leading: FloatingActionButton(
-          child: const Icon(Icons.create), onPressed: () {}),
+          child: const Icon(Icons.create), onPressed: () {},),
       groupAlignment: 0.0,
       selectedIndex: navRailIndex,
       labelType: NavigationRailLabelType.selected,
@@ -2184,7 +2184,7 @@ class _MenusState extends State<Menus> {
         <DropdownMenuEntry<ColorLabel>>[];
     for (final ColorLabel color in ColorLabel.values) {
       colorEntries.add(DropdownMenuEntry<ColorLabel>(
-          value: color, label: color.label, enabled: color.label != 'Grey'));
+          value: color, label: color.label, enabled: color.label != 'Grey',),);
     }
 
     final List<DropdownMenuEntry<IconLabel>> iconEntries =
@@ -2242,7 +2242,7 @@ class _MenusState extends State<Menus> {
               Icon(
                 selectedIcon?.icon,
                 color: selectedColor?.color ?? Colors.grey.withOpacity(0.5),
-              )
+              ),
             ],
           ),
         ],
@@ -2317,7 +2317,7 @@ class _SlidersState extends State<Sliders> {
               },
             ),
           ],
-        ));
+        ),);
   }
 }
 
@@ -2342,12 +2342,12 @@ class _SearchAnchorsState extends State<SearchAnchors> {
                 controller.text = color.label;
                 controller.selection =
                     TextSelection.collapsed(offset: controller.text.length);
-              }),
+              },),
           onTap: () {
             controller.closeView(color.label);
             handleSelection(color);
           },
-        ));
+        ),);
   }
 
   Iterable<Widget> getSuggestions(SearchController controller) {
@@ -2363,12 +2363,12 @@ class _SearchAnchorsState extends State<SearchAnchors> {
                     controller.text = filteredColor.label;
                     controller.selection =
                         TextSelection.collapsed(offset: controller.text.length);
-                  }),
+                  },),
               onTap: () {
                 controller.closeView(filteredColor.label);
                 handleSelection(filteredColor);
               },
-            ));
+            ),);
   }
 
   void handleSelection(ColorItem color) {
@@ -2398,8 +2398,8 @@ class _SearchAnchorsState extends State<SearchAnchors> {
                 return <Widget>[
                   const Center(
                     child: Text('No search history.',
-                        style: TextStyle(color: Colors.grey)),
-                  )
+                        style: TextStyle(color: Colors.grey),),
+                  ),
                 ];
               }
               return getSuggestions(controller);
@@ -2409,7 +2409,7 @@ class _SearchAnchorsState extends State<SearchAnchors> {
           if (selectedColor == null)
             const Text('Select a color')
           else
-            Text('Last selected color is $selectedColor')
+            Text('Last selected color is $selectedColor'),
         ],
       ),
     );
@@ -2446,12 +2446,12 @@ class _ComponentDecorationState extends State<ComponentDecoration> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(widget.label,
-                    style: Theme.of(context).textTheme.titleSmall),
+                    style: Theme.of(context).textTheme.titleSmall,),
                 Tooltip(
                   message: widget.tooltipMessage,
                   child: const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 5.0),
-                      child: Icon(Icons.info_outline, size: 16)),
+                      child: Icon(Icons.info_outline, size: 16),),
                 ),
               ],
             ),
@@ -2478,7 +2478,7 @@ class _ComponentDecorationState extends State<ComponentDecoration> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 5.0, vertical: 20.0),
+                          horizontal: 5.0, vertical: 20.0,),
                       child: Center(
                         child: widget.child,
                       ),
@@ -2496,7 +2496,7 @@ class _ComponentDecorationState extends State<ComponentDecoration> {
 
 class ComponentGroupDecoration extends StatelessWidget {
   const ComponentGroupDecoration(
-      {super.key, required this.label, required this.children});
+      {super.key, required this.label, required this.children,});
 
   final String label;
   final List<Widget> children;
@@ -2519,7 +2519,7 @@ class ComponentGroupDecoration extends StatelessWidget {
               children: [
                 Text(label, style: Theme.of(context).textTheme.titleLarge),
                 colDivider,
-                ...children
+                ...children,
               ],
             ),
           ),

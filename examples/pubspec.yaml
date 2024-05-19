@@ -2,6 +2,7 @@ name: wt_material_3_demo_examples
 description: "A new Flutter project."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
+homepage: https://github.com/tmcmaster/wt_material_3_demo/tree/main/examples
 
 environment:
   sdk: ^3.4.0

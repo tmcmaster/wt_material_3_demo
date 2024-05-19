@@ -9,8 +9,8 @@ class ElevationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color shadowColor = Theme.of(context).colorScheme.shadow;
-    Color surfaceTint = Theme.of(context).colorScheme.primary;
+    final Color shadowColor = Theme.of(context).colorScheme.shadow;
+    final Color surfaceTint = Theme.of(context).colorScheme.primary;
     return Expanded(
       child: CustomScrollView(
         slivers: [
@@ -71,7 +71,7 @@ class ElevationGrid extends StatelessWidget {
   final Color? surfaceTintColor;
 
   List<ElevationCard> elevationCards(
-      Color? shadowColor, Color? surfaceTintColor) {
+      Color? shadowColor, Color? surfaceTintColor,) {
     return elevations
         .map(
           (elevationInfo) => ElevationCard(
@@ -99,14 +99,14 @@ class ElevationGrid extends StatelessWidget {
             children: elevationCards(shadowColor, surfaceTintColor),
           );
         }
-      }),
+      },),
     );
   }
 }
 
 class ElevationCard extends StatefulWidget {
   const ElevationCard(
-      {super.key, required this.info, this.shadowColor, this.surfaceTint});
+      {super.key, required this.info, this.shadowColor, this.surfaceTint,});
 
   final ElevationInfo info;
   final Color? shadowColor;

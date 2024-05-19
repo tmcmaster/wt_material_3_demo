@@ -4,8 +4,8 @@
 
 import 'package:flutter/material.dart';
 
-import 'constants.dart';
-import 'home.dart';
+import 'package:wt_material_3_demo/src/constants.dart';
+import 'package:wt_material_3_demo/src/home.dart';
 
 class Material3DemoApp extends StatefulWidget {
   const Material3DemoApp({super.key});

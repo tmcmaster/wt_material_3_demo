@@ -27,9 +27,11 @@ scripts:
       $after: (cd examples && rps project test)
     analyse:
       $script: flutter analyze
-      $after: (cd examples; rps project analyse)
-    status: git status
-    size: du -sh *
+      #$after: (cd examples; rps project analyse)
+  lint:
+    check: dart fix --dry-run
+  status: git status
+  size: du -sh *
 
 dependencies:
   cupertino_icons: ^1.0.2
@@ -43,4 +45,3 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0

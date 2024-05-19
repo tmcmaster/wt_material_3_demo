@@ -5,6 +5,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:wt_logging/wt_logging.dart';
 
 const Widget divider = SizedBox(height: 10);
 
@@ -14,16 +15,17 @@ const Widget divider = SizedBox(height: 10);
 const double narrowScreenWidthThreshold = 400;
 
 class ColorPalettesScreen extends StatelessWidget {
+  static final log = logger(ColorPalettesScreen, level: Level.debug);
   const ColorPalettesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Color selectedColor = Theme.of(context).primaryColor;
-    ThemeData lightTheme = ThemeData(
+    final Color selectedColor = Theme.of(context).primaryColor;
+    final ThemeData lightTheme = ThemeData(
       colorSchemeSeed: selectedColor,
       brightness: Brightness.light,
     );
-    ThemeData darkTheme = ThemeData(
+    final ThemeData darkTheme = ThemeData(
       colorSchemeSeed: selectedColor,
       brightness: Brightness.dark,
     );
@@ -55,7 +57,7 @@ class ColorPalettesScreen extends StatelessWidget {
               const TextSpan(
                   text: 'To create color schemes based on a '
                       'platform\'s implementation of dynamic color, '
-                      'use the '),
+                      'use the ',),
               TextSpan(
                 text: 'dynamic_color',
                 style: const TextStyle(decoration: TextDecoration.underline),
@@ -123,7 +125,7 @@ class ColorPalettesScreen extends StatelessWidget {
             ),
           );
         }
-      }),
+      },),
     );
   }
 }
@@ -357,8 +359,7 @@ class ColorChip extends StatelessWidget {
   final Color? onColor;
   final String label;
 
-  static Color contrastColor(Color color) =>
-      switch (ThemeData.estimateBrightnessForColor(color)) {
+  static Color contrastColor(Color color) => switch (ThemeData.estimateBrightnessForColor(color)) {
         Brightness.dark => Colors.white,
         Brightness.light => Colors.black
       };

@@ -4,11 +4,11 @@
 
 import 'package:flutter/material.dart';
 
-import 'color_palettes_screen.dart';
-import 'component_screen.dart';
-import 'constants.dart';
-import 'elevation_screen.dart';
-import 'typography_screen.dart';
+import 'package:wt_material_3_demo/src/color_palettes_screen.dart';
+import 'package:wt_material_3_demo/src/component_screen.dart';
+import 'package:wt_material_3_demo/src/constants.dart';
+import 'package:wt_material_3_demo/src/elevation_screen.dart';
+import 'package:wt_material_3_demo/src/typography_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({
@@ -118,7 +118,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               one: FirstComponentList(
                   showNavBottomBar: showNavBarExample,
                   scaffoldKey: scaffoldKey,
-                  showSecondList: showMediumSizeLayout || showLargeSizeLayout),
+                  showSecondList: showMediumSizeLayout || showLargeSizeLayout,),
               two: SecondComponentList(
                 scaffoldKey: scaffoldKey,
               ),
@@ -151,7 +151,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 handleImageSelect: widget.handleImageSelect,
                 imageSelected: widget.imageSelected,
                 colorSelectionMethod: widget.colorSelectionMethod,
-              )
+              ),
             ]
           : [Container()],
     );
@@ -200,7 +200,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           railAnimation: railAnimation,
           appBar: createAppBar(),
           body: createScreenFor(
-              ScreenSelected.values[screenIndex], controller.value == 1),
+              ScreenSelected.values[screenIndex], controller.value == 1,),
           navigationRail: NavigationRail(
             extended: showLargeSizeLayout,
             destinations: navRailDestinations,
@@ -319,7 +319,7 @@ class _ColorSeedButton extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       itemBuilder: (context) {
         return List.generate(ColorSeed.values.length, (index) {
-          ColorSeed currentColor = ColorSeed.values[index];
+          final ColorSeed currentColor = ColorSeed.values[index];
 
           return PopupMenuItem(
             value: index,
@@ -373,7 +373,7 @@ class _ColorImageButton extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       itemBuilder: (context) {
         return List.generate(ColorImageProvider.values.length, (index) {
-          ColorImageProvider currentImageProvider =
+          final ColorImageProvider currentImageProvider =
               ColorImageProvider.values[index];
 
           return PopupMenuItem(
@@ -393,7 +393,7 @@ class _ColorImageButton extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image(
                           image: NetworkImage(
-                              ColorImageProvider.values[index].url),
+                              ColorImageProvider.values[index].url,),
                         ),
                       ),
                     ),
@@ -456,7 +456,7 @@ class _ExpandedTrailingActions extends StatelessWidget {
                   value: useLightMode,
                   onChanged: (value) {
                     handleBrightnessChange(value);
-                  })
+                  },),
             ],
           ),
           Row(
@@ -469,7 +469,7 @@ class _ExpandedTrailingActions extends StatelessWidget {
                   value: useMaterial3,
                   onChanged: (_) {
                     handleMaterialVersionChange();
-                  })
+                  },),
             ],
           ),
           const Divider(),
@@ -592,7 +592,7 @@ class NavigationTransition extends StatefulWidget {
       required this.navigationRail,
       required this.navigationBar,
       required this.appBar,
-      required this.body});
+      required this.body,});
 
   final GlobalKey<ScaffoldState> scaffoldKey;
   final AnimationController animationController;
@@ -710,7 +710,7 @@ class RailTransition extends StatefulWidget {
       {super.key,
       required this.animation,
       required this.backgroundColor,
-      required this.child});
+      required this.child,});
 
   final Animation<double> animation;
   final Widget child;
@@ -766,7 +766,7 @@ class BarTransition extends StatefulWidget {
       {super.key,
       required this.animation,
       required this.backgroundColor,
-      required this.child});
+      required this.child,});
 
   final Animation<double> animation;
   final Color backgroundColor;
@@ -863,7 +863,7 @@ class _OneTwoTransitionState extends State<OneTwoTransition> {
               translation: offsetAnimation.value,
               child: widget.two,
             ),
-          )
+          ),
         ],
       ],
     );

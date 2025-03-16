@@ -40,7 +40,7 @@ dependencies:
   url_launcher: ^6.1.8
   wt_logging:
     git:
-      url: https://github.com/tmcmaster/wt_logging.git
+      url: git@github.com:tmcmaster/wt_logging.git
 
 dev_dependencies:
   flutter_test:

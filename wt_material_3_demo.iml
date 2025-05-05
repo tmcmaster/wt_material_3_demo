@@ -12,6 +12,12 @@
       <excludeFolder url="file://$MODULE_DIR$/examples/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/examples/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/examples/build" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/macos/Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/macos/Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/macos/Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/build" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/macos/Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/macos/Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/examples/macos/Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/example/build" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 29 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
